@@ -1,7 +1,7 @@
 // src/Form.jsx
 import React, { useState } from "react";
 
-function Form() {
+function Form(props) {
     function handleChange(event) {
         const { name, value } = event.target;
         if (name === "job")
@@ -9,12 +9,20 @@ function Form() {
         else
             setPerson({ name: value, job: person["job"] });
     }
+
+    function submitForm() {
+        props.handleSubmit(person);
+        setPerson({ name: "", job: "" });
+    }
+
     const [person, setPerson] = useState({
         name: "",
         job: ""
     });
+
     return (
         <form>
+            <input type="button" value="Submit" onClick={submitForm} />
             <label htmlFor="name">Name</label>
             <input
                 type="text"
