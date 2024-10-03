@@ -12,6 +12,16 @@ const users = {
       job: "Janitor"
     },
     {
+      id: "peanut13213",
+      name: "Charlie",
+      job: "Janitor"
+    },
+    {
+      id: "idfasodbf1234",
+      name: "Charlie",
+      job: "Janitor"
+    },
+    {
       id: "abc123",
       name: "Mac",
       job: "Bouncer"
@@ -38,6 +48,10 @@ app.use(express.json());
 
 const findUserById = (id) => 
   users["users_list"].find((user) => user.id === id);
+
+const findUserByNameAndJob = (name, job) => {
+  return users["users_list"].filter((user) => user.job === job && user.name == name);
+};
 
 const deleteUserById = (id) =>
   users["users_list"].filter((user) => user.id !== id); 
@@ -91,6 +105,18 @@ app.delete("/users/:id", (req, res) => {
     res.status(404).send("Id not found haha");
   }
     res.send(result);
+});
+
+app.get("/users/:name/:job", (req, res) => {
+  const name = req.params.name;
+  const job = req.params.job;
+  let result = findUserByNameAndJob(name, job);
+  if (result === undefined) {
+    res.status(404).send("Can not find person with same name and job");
+  }
+  else {
+    res.send(result);
+  }
 });
 
 
