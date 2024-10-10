@@ -71,10 +71,13 @@ const addUser = (user) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
-
+  let result = addUser(userToAdd);
   console.log(users["users_list"]);
-  res.send();
+  if (result !== undefined) {
+    console.log("hi");
+    res.status(201).send("Content Created");
+    res.send();
+  }
 });
 
 app.get("/users/:id", (req, res) => {
