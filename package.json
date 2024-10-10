@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd packages/react-frontend && vite\" \"cd packages/express-backend && npx nodemon backend.js\"",
+    "start": "npm run dev"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
-  ,
+  "description": "",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
 }
