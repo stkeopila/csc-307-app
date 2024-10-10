@@ -29,7 +29,7 @@ const users = {
     },
     {
       id: "asdasd",
-      name: "Mac",
+      name: "asd",
       job: "Professor"
     },
     {
@@ -71,12 +71,13 @@ const addUser = (user) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
+  userToAdd.id = Math.random().toString();
   let result = addUser(userToAdd);
   console.log(users["users_list"]);
   if (result !== undefined) {
     console.log("hi");
     res.status(201).send("Content Created");
-    res.send();
+    res.send(result);
   }
 });
 
