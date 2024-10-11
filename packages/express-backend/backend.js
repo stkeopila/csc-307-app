@@ -55,8 +55,11 @@ const findUserByNameAndJob = (name, job) => {
   return users["users_list"].filter((user) => user.job === job && user.name == name);
 };
 
-const deleteUserById = (id) =>
-  users["users_list"].filter((user) => user.id !== id); 
+const deleteUserById = (id) => {
+  const a = users["users_list"].filter((user) => user.id !== id);
+  users["users_list"] = a
+  return a
+}
 
 const findUserByName = (name) => {
   return users["users_list"].filter(
@@ -107,12 +110,17 @@ app.get("/users", (req, res) => {
 
 app.delete("/users/:id", (req, res) => {
   const id = req.params.id;
-  let result = deleteUserById(id);
+  let result = findUserById(id);
   if (result === undefined) {
-    res.status(404).send("Id not found haha");
+    res.status(404).send("Resource not found");
   }
-    res.send(result);
-});
+  else {
+    const withoutResult = deleteUserById(id);
+    console.log(withoutResult);
+    console.log(result.id)
+    res.status(204).send(result.id);
+  }
+  });
 
 app.get("/users/:name/:job", (req, res) => {
   const name = req.params.name;
