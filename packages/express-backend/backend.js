@@ -71,10 +71,10 @@ const addUser = (user) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
+  addUser(userToAdd);
   userToAdd.id = Math.random().toString();
-  let result = addUser(userToAdd);
   console.log(users["users_list"]);
-  if (result === undefined) {
+  if (userToAdd === undefined) {
     res.status(404).send("Failed to add User")
   }
   else {

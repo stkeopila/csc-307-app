@@ -2,8 +2,6 @@
 import React, {useState, useEffect} from "react";
 import Table from "./Table";
 import Form from "./Form";
-// import { response } from "express";
-// import { response } from "express";
 
 function MyApp() {
   const [characters, setCharacters] = useState([]);
@@ -20,7 +18,8 @@ function MyApp() {
   }
   function updateList(person) { 
     postUser(person)
-      .then(() => setCharacters([...characters, person]))
+      .then(res => {return res.json()})
+      .then(createdUser =>  {setCharacters([...characters, createdUser])})
       .catch((error) => {
         console.log(error);
       })
@@ -34,7 +33,7 @@ function MyApp() {
       },
       body: JSON.stringify(person),
     })
-    return promise;
+    return promise
   }
 
   useEffect(() => {
