@@ -15,7 +15,7 @@ function MyApp() {
 
   function removeUser(id) {
     removeOneCharacter(id)
-    setCharacters(prevCharacters => prevCharacters.filter(prev => prev.id !== id))
+    setCharacters(prevCharacters => prevCharacters.filter(prev => prev._id !== id))
   }
 
   function fetchUsers() {
@@ -33,7 +33,7 @@ function MyApp() {
   }
   
   function postUser(person) {
-    const promise = fetch("Http://localhost:8000/users", {
+    const promise = fetch("http://localhost:8000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
